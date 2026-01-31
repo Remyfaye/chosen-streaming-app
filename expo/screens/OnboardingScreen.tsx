@@ -110,14 +110,14 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
       description: 'Stream unlimited music and discover your next favorite artist.',
       highlight: 'Music redefined',
       component: StreamingIllustration,
-      bgColor: '#16213E',
+      bgColor: '#0A1428',
     },
     {
       title: 'Unlock Premium',
       description: 'Go premium for ad-free listening, offline downloads, and exclusive content.',
       highlight: 'Premium features',
       component: PremiumIllustration,
-      bgColor: '#16213E',
+      bgColor: '#1A1A2E',
     },
     {
       title: 'Support Artists Directly',
