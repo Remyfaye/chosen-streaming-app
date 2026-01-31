@@ -129,7 +129,7 @@ export default function App() {
             children={() => <ArtistScreen token={token} user={user} />}
           />
         </Tab.Navigator>
-      ) : hasSeenOnboarding ? (
+      ) : !hasSeenOnboarding ? (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen
             name="Onboarding"
