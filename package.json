@@ -11,6 +11,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@expo/dom-webview": "latest",
+    "@expo/metro-runtime": "latest",
     "@expo/vector-icons": "15.0.3",
     "@hookform/resolvers": "^3.10.0",
     "@prisma/client": "7.3.0",
@@ -72,6 +74,7 @@
     "react-native": "0.83.1",
     "react-native-safe-area-context": "latest",
     "react-native-screens": "latest",
+    "react-native-webview": "latest",
     "react-resizable-panels": "^2.1.7",
     "recharts": "2.15.4",
     "sonner": "^1.7.4",

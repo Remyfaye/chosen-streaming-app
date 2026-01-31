@@ -13,70 +13,70 @@ This guide will help you get the Crypto Beats platform up and running locally.
 
 ## Step 1: Clone & Install
 
-```bash
+\`\`\`bash
 # Install backend dependencies
 npm install
 
 # Install Prisma CLI
 npm install -D prisma @prisma/cli
-```
+\`\`\`
 
 ## Step 2: Set Up Database
 
 1. **Create a PostgreSQL database** on Neon or locally:
-   ```bash
+   \`\`\`bash
    # If using Neon, get your connection string from dashboard
-   ```
+   \`\`\`
 
 2. **Configure environment variables:**
-   ```bash
+   \`\`\`bash
    cp .env.example .env
-   ```
+   \`\`\`
 
 3. **Update `.env` with your database URL:**
-   ```
+   \`\`\`
    DATABASE_URL=postgresql://user:password@localhost:5432/crypto_beats
    JWT_SECRET=dev-secret-key-change-in-production
-   ```
+   \`\`\`
 
 4. **Run database migrations:**
-   ```bash
+   \`\`\`bash
    npm run prisma:migrate
    # or
    npx prisma migrate dev --name init
-   ```
+   \`\`\`
 
 5. **Generate Prisma client:**
-   ```bash
+   \`\`\`bash
    npm run prisma:generate
-   ```
+   \`\`\`
 
 ## Step 3: Start Backend
 
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 The API server will run at `http://localhost:3000`
 
 Test it:
-```bash
+\`\`\`bash
 curl http://localhost:3000/api/tracks
-```
+\`\`\`
 
 ## Step 4: Set Up Expo Frontend
 
-```bash
+\`\`\`bash
 cd expo
 npm install
 
 # Create .env.local (if needed)
 # EXPO_PUBLIC_API_URL=http://localhost:3000/api
-```
+\`\`\`
 
 ## Step 5: Run Mobile App
 
-```bash
+\`\`\`bash
 # Start Expo
 npm start
 
@@ -84,7 +84,7 @@ npm start
 # - Press 'i' for iOS simulator
 # - Press 'a' for Android emulator  
 # - Press 'w' for web version
-```
+\`\`\`
 
 ## Testing the App
 
@@ -114,7 +114,7 @@ npm start
 ## API Testing with cURL
 
 ### Sign Up
-```bash
+\`\`\`bash
 curl -X POST http://localhost:3000/api/auth/signup \
   -H "Content-Type: application/json" \
   -d '{
@@ -123,25 +123,25 @@ curl -X POST http://localhost:3000/api/auth/signup \
     "password": "password123",
     "userType": "LISTENER"
   }'
-```
+\`\`\`
 
 ### Login
-```bash
+\`\`\`bash
 curl -X POST http://localhost:3000/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "test@example.com",
     "password": "password123"
   }'
-```
+\`\`\`
 
 ### Get Tracks
-```bash
+\`\`\`bash
 curl http://localhost:3000/api/tracks
-```
+\`\`\`
 
 ### Upload Track (replace TOKEN with your JWT)
-```bash
+\`\`\`bash
 curl -X POST http://localhost:3000/api/tracks \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
@@ -153,24 +153,24 @@ curl -X POST http://localhost:3000/api/tracks \
     "duration": 240,
     "genre": "Electronic"
   }'
-```
+\`\`\`
 
 ## Troubleshooting
 
 ### Database Connection Error
-```
+\`\`\`
 error: connect ECONNREFUSED 127.0.0.1:5432
-```
+\`\`\`
 **Solution:** Make sure PostgreSQL is running. For Neon, verify DATABASE_URL is correct.
 
 ### Port 3000 Already in Use
-```bash
+\`\`\`bash
 # Find process on port 3000
 lsof -i :3000
 
 # Kill process
 kill -9 <PID>
-```
+\`\`\`
 
 ### Expo Connection Issues
 - Make sure backend is running
@@ -178,17 +178,17 @@ kill -9 <PID>
 - Use your machine's IP instead of localhost on physical device
 
 ### Database Migration Errors
-```bash
+\`\`\`bash
 # Reset (caution - deletes data!)
 npx prisma migrate reset
 
 # Check schema
 npx prisma db push
-```
+\`\`\`
 
 ## File Structure
 
-```
+\`\`\`
 /
 ├── app/
 │   ├── api/              # Next.js API routes
@@ -209,7 +209,7 @@ npx prisma db push
 │   └── types/            # TypeScript types
 └── scripts/
     └── init-db.sql       # Database initialization
-```
+\`\`\`
 
 ## Next Steps
 

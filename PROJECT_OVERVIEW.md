@@ -15,7 +15,7 @@ You now have a complete, production-ready music streaming platform with both bac
 - **Earnings** - Monetization tracking
 
 ### API Endpoints (30+ routes)
-```
+\`\`\`
 Authentication:
 ✓ POST /api/auth/signup
 ✓ POST /api/auth/login
@@ -34,7 +34,7 @@ Social:
 ✓ POST /api/tracks/[id]/favorite
 ✓ DELETE /api/tracks/[id]/favorite
 ✓ POST /api/tracks/[id]/comments
-```
+\`\`\`
 
 ### Features
 - JWT authentication with 30-day tokens
@@ -94,7 +94,7 @@ Social:
 
 ## Project Structure
 
-```
+\`\`\`
 crypto-beats/
 ├── Backend (Next.js)
 │   ├── app/api/
@@ -127,7 +127,7 @@ crypto-beats/
 │   ├── GETTING_STARTED.md
 │   ├── API_DOCUMENTATION.md
 │   └── .env.example
-```
+\`\`\`
 
 ## Key Features
 
@@ -165,26 +165,26 @@ crypto-beats/
 ## How to Get Started
 
 1. **Install dependencies:**
-   ```bash
+   \`\`\`bash
    npm install
    npm run prisma:generate
-   ```
+   \`\`\`
 
 2. **Setup database:**
-   ```bash
+   \`\`\`bash
    npm run prisma:migrate
-   ```
+   \`\`\`
 
 3. **Start backend:**
-   ```bash
+   \`\`\`bash
    npm run dev
-   ```
+   \`\`\`
 
 4. **Start mobile app:**
-   ```bash
+   \`\`\`bash
    cd expo
    npm start
-   ```
+   \`\`\`
 
 See GETTING_STARTED.md for detailed setup instructions.
 
@@ -192,7 +192,7 @@ See GETTING_STARTED.md for detailed setup instructions.
 
 Postman Collection ready! Example request:
 
-```bash
+\`\`\`bash
 # Login
 curl -X POST http://localhost:3000/api/auth/login \
   -H "Content-Type: application/json" \
@@ -200,7 +200,7 @@ curl -X POST http://localhost:3000/api/auth/login \
 
 # Get tracks
 curl http://localhost:3000/api/tracks?genre=Hip-Hop
-```
+\`\`\`
 
 ## What's Ready for Production
 
@@ -226,13 +226,13 @@ curl http://localhost:3000/api/tracks?genre=Hip-Hop
 
 ## Environment Variables Needed
 
-```
+\`\`\`
 DATABASE_URL          # PostgreSQL connection
 JWT_SECRET           # Token signing secret
 BLOB_READ_WRITE_TOKEN # Vercel Blob access
 STRIPE_SECRET_KEY    # Payment processing (optional)
 NEXT_PUBLIC_API_URL  # Frontend API endpoint
-```
+\`\`\`
 
 ## File Locations for Key Files
 
@@ -246,21 +246,21 @@ NEXT_PUBLIC_API_URL  # Frontend API endpoint
 ## Deployment Instructions
 
 ### Backend to Vercel
-```bash
+\`\`\`bash
 vercel deploy
-```
+\`\`\`
 
 ### Mobile to App Store
-```bash
+\`\`\`bash
 eas build --platform ios
 eas submit --platform ios
-```
+\`\`\`
 
 ### Mobile to Play Store
-```bash
+\`\`\`bash
 eas build --platform android
 eas submit --platform android
-```
+\`\`\`
 
 ---
 

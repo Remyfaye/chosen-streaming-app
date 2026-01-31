@@ -29,58 +29,58 @@ A full-stack music streaming and social media platform built with Next.js backen
 ### Backend Setup
 
 1. **Install dependencies:**
-```bash
+\`\`\`bash
 npm install
 npm install -D prisma @prisma/cli
-```
+\`\`\`
 
 2. **Set up environment variables (.env):**
-```
+\`\`\`
 DATABASE_URL=postgresql://user:password@host/dbname
 JWT_SECRET=your-secret-key-here
 NEXT_PUBLIC_API_URL=http://localhost:3000
 BLOB_READ_WRITE_TOKEN=your-vercel-blob-token
-```
+\`\`\`
 
 3. **Initialize database:**
-```bash
+\`\`\`bash
 npx prisma migrate dev --name init
 # This runs the migration from scripts/init-db.sql
-```
+\`\`\`
 
 4. **Generate Prisma client:**
-```bash
+\`\`\`bash
 npm run prisma:generate
-```
+\`\`\`
 
 5. **Start development server:**
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 The API will be available at `http://localhost:3000/api`
 
 ### Mobile App Setup (Expo)
 
 1. **Navigate to Expo folder:**
-```bash
+\`\`\`bash
 cd expo
-```
+\`\`\`
 
 2. **Install dependencies:**
-```bash
+\`\`\`bash
 npm install
-```
+\`\`\`
 
 3. **Configure API URL (.env.local):**
-```
+\`\`\`
 EXPO_PUBLIC_API_URL=http://your-backend-url/api
-```
+\`\`\`
 
 4. **Start Expo:**
-```bash
+\`\`\`bash
 npm start
-```
+\`\`\`
 
 Then press:
 - `i` for iOS simulator
@@ -124,9 +124,9 @@ Then press:
 ## Authentication
 
 Uses JWT tokens with 30-day expiration. Include token in Authorization header:
-```
+\`\`\`
 Authorization: Bearer {token}
-```
+\`\`\`
 
 ## File Storage
 
@@ -160,17 +160,17 @@ Audio files stored via Vercel Blob:
 ## Deployment
 
 ### Backend to Vercel
-```bash
+\`\`\`bash
 vercel deploy
-```
+\`\`\`
 
 ### Mobile to App Store/Play Store
-```bash
+\`\`\`bash
 eas build --platform ios
 eas build --platform android
 eas submit --platform ios
 eas submit --platform android
-```
+\`\`\`
 
 ## Development Notes
 

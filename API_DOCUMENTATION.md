@@ -1,23 +1,23 @@
 # API Documentation
 
 ## Base URL
-```
+\`\`\`
 http://localhost:3000/api
-```
+\`\`\`
 
 ## Authentication
 
 All protected endpoints require a Bearer token:
-```
+\`\`\`
 Authorization: Bearer {token}
-```
+\`\`\`
 
 ---
 
 ## Auth Endpoints
 
 ### Sign Up
-```
+\`\`\`
 POST /auth/signup
 Content-Type: application/json
 
@@ -38,10 +38,10 @@ Response: 201
     "userType": "LISTENER"
   }
 }
-```
+\`\`\`
 
 ### Login
-```
+\`\`\`
 POST /auth/login
 Content-Type: application/json
 
@@ -62,14 +62,14 @@ Response: 200
     "name": "full_name_or_null"
   }
 }
-```
+\`\`\`
 
 ---
 
 ## Track Endpoints
 
 ### Get Tracks (Discovery)
-```
+\`\`\`
 GET /tracks?genre=Hip-Hop&limit=20&offset=0
 
 Response: 200
@@ -97,10 +97,10 @@ Response: 200
   "limit": 20,
   "offset": 0
 }
-```
+\`\`\`
 
 ### Upload Track (Protected)
-```
+\`\`\`
 POST /tracks
 Authorization: Bearer {token}
 Content-Type: application/json
@@ -128,10 +128,10 @@ Response: 201
     "avatar": "url_or_null"
   }
 }
-```
+\`\`\`
 
 ### Get Track Details
-```
+\`\`\`
 GET /tracks/{id}
 
 Response: 200
@@ -168,10 +168,10 @@ Response: 200
     "plays": 1000
   }
 }
-```
+\`\`\`
 
 ### Delete Track (Protected)
-```
+\`\`\`
 DELETE /tracks/{id}
 Authorization: Bearer {token}
 
@@ -179,14 +179,14 @@ Response: 200
 {
   "message": "Track deleted"
 }
-```
+\`\`\`
 
 ---
 
 ## User Endpoints
 
 ### Get User Profile
-```
+\`\`\`
 GET /users/{username}
 
 Response: 200
@@ -209,10 +209,10 @@ Response: 200
     "isVerified": true
   }
 }
-```
+\`\`\`
 
 ### Update Profile (Protected)
-```
+\`\`\`
 PUT /users/{username}
 Authorization: Bearer {token}
 Content-Type: application/json
@@ -231,14 +231,14 @@ Response: 200
   "avatar": "https://...",
   "bio": "Updated bio"
 }
-```
+\`\`\`
 
 ---
 
 ## Interaction Endpoints
 
 ### Add to Favorites (Protected)
-```
+\`\`\`
 POST /tracks/{trackId}/favorite
 Authorization: Bearer {token}
 
@@ -249,10 +249,10 @@ Response: 201
   "trackId": "track_id",
   "createdAt": "2024-01-31T..."
 }
-```
+\`\`\`
 
 ### Remove from Favorites (Protected)
-```
+\`\`\`
 DELETE /tracks/{trackId}/favorite
 Authorization: Bearer {token}
 
@@ -260,10 +260,10 @@ Response: 200
 {
   "message": "Removed from favorites"
 }
-```
+\`\`\`
 
 ### Post Comment (Protected)
-```
+\`\`\`
 POST /tracks/{trackId}/comments
 Authorization: Bearer {token}
 Content-Type: application/json
@@ -285,46 +285,46 @@ Response: 201
   },
   "createdAt": "2024-01-31T..."
 }
-```
+\`\`\`
 
 ---
 
 ## Error Responses
 
 ### 400 - Bad Request
-```json
+\`\`\`json
 {
   "error": "Missing required fields"
 }
-```
+\`\`\`
 
 ### 401 - Unauthorized
-```json
+\`\`\`json
 {
   "error": "Invalid token"
 }
-```
+\`\`\`
 
 ### 403 - Forbidden
-```json
+\`\`\`json
 {
   "error": "Unauthorized"
 }
-```
+\`\`\`
 
 ### 404 - Not Found
-```json
+\`\`\`json
 {
   "error": "Track not found"
 }
-```
+\`\`\`
 
 ### 500 - Server Error
-```json
+\`\`\`json
 {
   "error": "Internal server error"
 }
-```
+\`\`\`
 
 ---
 
