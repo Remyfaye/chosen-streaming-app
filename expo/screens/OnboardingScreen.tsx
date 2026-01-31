@@ -11,7 +11,6 @@ import {
   ScrollView,
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import Svg, { Circle, Path, Line, G } from 'react-native-svg'
 
 const { width, height } = Dimensions.get('window')
 
@@ -19,51 +18,28 @@ interface OnboardingScreenProps {
   onComplete: () => void
 }
 
-// Creative headset logo component
+// Creative headset logo component using React Native
 function ChosenLogo() {
   return (
-    <Svg width={90} height={90} viewBox="0 0 100 100">
-      <G>
-        {/* Left ear cup outer */}
-        <Circle cx="22" cy="42" r="16" fill="none" stroke="#00FF00" strokeWidth="2.5" />
-        {/* Left ear cup inner accent */}
-        <Circle cx="22" cy="42" r="11" fill="none" stroke="#00FF00" strokeWidth="1" opacity="0.5" />
-        
-        {/* Right ear cup outer */}
-        <Circle cx="78" cy="42" r="16" fill="none" stroke="#00FF00" strokeWidth="2.5" />
-        {/* Right ear cup inner accent */}
-        <Circle cx="78" cy="42" r="11" fill="none" stroke="#00FF00" strokeWidth="1" opacity="0.5" />
-        
-        {/* Headband arc left */}
-        <Path d="M 22 26 Q 15 12 50 10" fill="none" stroke="#00FF00" strokeWidth="2.5" strokeLinecap="round" />
-        {/* Headband arc right */}
-        <Path d="M 50 10 Q 85 12 78 26" fill="none" stroke="#00FF00" strokeWidth="2.5" strokeLinecap="round" />
-        
-        {/* Center connector with gold accent */}
-        <Line x1="50" y1="10" x2="50" y2="24" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" />
-        
-        {/* Left connection bracket */}
-        <Line x1="22" y1="26" x2="22" y2="32" stroke="#00FF00" strokeWidth="2" strokeLinecap="round" opacity="0.8" />
-        {/* Right connection bracket */}
-        <Line x1="78" y1="26" x2="78" y2="32" stroke="#00FF00" strokeWidth="2" strokeLinecap="round" opacity="0.8" />
-        
-        {/* Microphone boom - curved */}
-        <Path d="M 32 56 Q 38 70 42 82" fill="none" stroke="#00FF00" strokeWidth="2" strokeLinecap="round" />
-        {/* Mic capsule - gold circle */}
-        <Circle cx="42" cy="85" r="2.5" fill="#FFD700" />
-        {/* Mic mesh detail */}
-        <Circle cx="42" cy="85" r="4" fill="none" stroke="#FFD700" strokeWidth="0.8" opacity="0.6" />
-        
-        {/* Speaker driver detail - left */}
-        <Circle cx="22" cy="42" r="7" fill="none" stroke="#00FF00" strokeWidth="0.8" opacity="0.4" />
-        {/* Speaker driver detail - right */}
-        <Circle cx="78" cy="42" r="7" fill="none" stroke="#00FF00" strokeWidth="0.8" opacity="0.4" />
-        
-        {/* Sound waves accent */}
-        <Path d="M 50 50 Q 60 45 65 42" fill="none" stroke="#FFD700" strokeWidth="1" opacity="0.6" strokeLinecap="round" />
-        <Path d="M 50 56 Q 58 52 62 50" fill="none" stroke="#FFD700" strokeWidth="1" opacity="0.4" strokeLinecap="round" />
-      </G>
-    </Svg>
+    <View style={styles.logoWrapper}>
+      {/* Headset visualization using stacked circular elements */}
+      <View style={styles.headsetContainer}>
+        {/* Left ear cup */}
+        <View style={[styles.earCup, styles.earCupLeft]} />
+        {/* Headband */}
+        <View style={styles.headband} />
+        {/* Right ear cup */}
+        <View style={[styles.earCup, styles.earCupRight]} />
+      </View>
+      {/* Microphone boom indicator */}
+      <View style={styles.micIndicator}>
+        <MaterialCommunityIcons name="microphone" size={16} color="#FFD700" />
+      </View>
+      {/* Sound wave accent */}
+      <View style={styles.soundWave}>
+        <MaterialCommunityIcons name="volume-high" size={20} color="#00FF00" />
+      </View>
+    </View>
   )
 }
 
@@ -139,6 +115,7 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
                 styles.logoContainer,
                 {
                   opacity: fadeAnim,
+                  transform: [{ translateY: slideAnim }],
                 },
               ]}
             >
@@ -247,6 +224,55 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     marginBottom: 16,
+  },
+  logoWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 90,
+    width: 90,
+  },
+  headsetContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 12,
+  },
+  earCup: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: '#00FF00',
+    backgroundColor: 'rgba(0, 255, 0, 0.08)',
+  },
+  earCupLeft: {
+    marginRight: -8,
+  },
+  earCupRight: {
+    marginLeft: -8,
+  },
+  headband: {
+    width: 16,
+    height: 40,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    borderLeftWidth: 2,
+    borderTopWidth: 2,
+    borderRightWidth: 2,
+    borderColor: '#00FF00',
+    marginBottom: 12,
+  },
+  micIndicator: {
+    marginTop: 8,
+    padding: 8,
+    backgroundColor: 'rgba(255, 215, 0, 0.1)',
+    borderRadius: 20,
+  },
+  soundWave: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    opacity: 0.7,
   },
   logo: {
     fontSize: 32,
