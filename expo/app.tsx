@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import React, { useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import OnboardingScreen from './screens/OnboardingScreen'
 import LoginScreen from './screens/LoginScreen'
 import HomeScreen from './screens/HomeScreen'
 import ArtistScreen from './screens/ArtistScreen'
@@ -15,6 +16,7 @@ const Tab = createBottomTabNavigator()
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [hasSeenOnboarding, setHasSeenOnboarding] = useState(false)
   const [token, setToken] = useState<string | null>(null)
   const [user, setUser] = useState<any>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -26,15 +28,24 @@ export default function App() {
   const bootstrapAsync = async () => {
     try {
       const savedToken = await AsyncStorage.getItem('userToken')
+      const seenOnboarding = await AsyncStorage.getItem('hasSeenOnboarding')
+      if (seenOnboarding) {
+        setHasSeenOnboarding(true)
+      }
       if (savedToken) {
         setToken(savedToken)
         setIsLoggedIn(true)
       }
     } catch (e) {
-      console.log('Failed to restore token')
+      console.log('Failed to restore session')
     } finally {
       setIsLoading(false)
     }
+  }
+
+  const handleOnboardingComplete = async () => {
+    await AsyncStorage.setItem('hasSeenOnboarding', 'true')
+    setHasSeenOnboarding(true)
   }
 
   const handleLoginSuccess = async (newToken: string, newUser: any) => {
@@ -94,12 +105,13 @@ export default function App() {
             children={() => <ArtistScreen token={token} user={user} />}
           />
         </Tab.Navigator>
+      ) : !hasSeenOnboarding ? (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Onboarding" children={() => <OnboardingScreen onComplete={handleOnboardingComplete} />} />
+        </Stack.Navigator>
       ) : (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen
-            name="Login"
-            children={() => <LoginScreen onLoginSuccess={handleLoginSuccess} />}
-          />
+          <Stack.Screen name="Login" children={() => <LoginScreen onLoginSuccess={handleLoginSuccess} />} />
         </Stack.Navigator>
       )}
     </NavigationContainer>
