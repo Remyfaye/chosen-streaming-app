@@ -92,46 +92,62 @@ export default function App() {
         <Tab.Navigator
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
-              let iconName = 'music';
-              if (route.name === 'Home') {
-                iconName = focused ? 'music' : 'music';
-              } else if (route.name === 'Artist') {
-                iconName = focused ? 'upload' : 'upload';
+              let iconName = "music";
+              if (route.name === "Home") {
+                iconName = focused ? "music" : "music";
+              } else if (route.name === "Artist") {
+                iconName = focused ? "upload" : "upload";
               }
-              return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
+              return (
+                <MaterialCommunityIcons
+                  name={iconName}
+                  size={size}
+                  color={color}
+                />
+              );
             },
-            tabBarActiveTintColor: '#00FF00',
-            tabBarInactiveTintColor: '#666',
+            tabBarActiveTintColor: "#00FF00",
+            tabBarInactiveTintColor: "#666",
             headerShown: true,
             headerStyle: {
-              backgroundColor: '#16213E',
+              backgroundColor: "#16213E",
             },
-            headerTintColor: '#00FF00',
+            headerTintColor: "#00FF00",
             headerTitleStyle: {
-              fontWeight: 'bold',
+              fontWeight: "bold",
             },
           })}
         >
           <Tab.Screen
             name="Home"
-            options={{ title: 'Discover' }}
+            options={{ title: "Discover" }}
             children={() => <HomeScreen token={token} user={user} />}
           />
           <Tab.Screen
             name="Artist"
-            options={{ title: 'My Music' }}
+            options={{ title: "My Music" }}
             children={() => <ArtistScreen token={token} user={user} />}
           />
         </Tab.Navigator>
-      ) : !hasSeenOnboarding ? (
+      ) : hasSeenOnboarding ? (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Onboarding" children={() => <OnboardingScreen onComplete={handleOnboardingComplete} />} />
+          <Stack.Screen
+            name="Onboarding"
+            children={() => (
+              <OnboardingScreen onComplete={handleOnboardingComplete} />
+            )}
+          />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen
             name="Signup"
-            children={() => <LoginScreen onLoginSuccess={handleLoginSuccess} isSignupMode={true} />}
+            children={() => (
+              <LoginScreen
+                onLoginSuccess={handleLoginSuccess}
+                isSignupMode={true}
+              />
+            )}
           />
           <Stack.Screen
             name="Login"
