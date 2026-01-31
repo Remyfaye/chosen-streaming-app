@@ -199,7 +199,7 @@ export default function LoginScreen({ onLoginSuccess }: { onLoginSuccess: (token
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         {/* Logo */}
         <View style={styles.logoSection}>
-          <Text style={styles.logo}>chosen</Text>
+          <Text style={styles.logo}>Chosen</Text>
           <Text style={styles.tagline}>{isSignup ? 'Join the movement' : 'Welcome back'}</Text>
         </View>
 

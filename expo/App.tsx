@@ -29,21 +29,27 @@ export default function App() {
     try {
       const savedToken = await AsyncStorage.getItem('userToken')
       const seenOnboarding = await AsyncStorage.getItem('hasSeenOnboarding')
-      if (seenOnboarding) {
+      
+      console.log('[v0] Bootstrap - Token:', !!savedToken, 'Onboarding seen:', seenOnboarding)
+      
+      // Only mark onboarding as seen if it's explicitly set to true
+      if (seenOnboarding === 'true') {
         setHasSeenOnboarding(true)
       }
+      
       if (savedToken) {
         setToken(savedToken)
         setIsLoggedIn(true)
       }
     } catch (e) {
-      console.log('Failed to restore session')
+      console.log('[v0] Failed to restore session:', e)
     } finally {
       setIsLoading(false)
     }
   }
 
   const handleOnboardingComplete = async () => {
+    console.log('[v0] Onboarding completed')
     await AsyncStorage.setItem('hasSeenOnboarding', 'true')
     setHasSeenOnboarding(true)
   }
@@ -67,6 +73,8 @@ export default function App() {
   if (isLoading) {
     return null
   }
+
+  console.log('[v0] App state - isLoggedIn:', isLoggedIn, 'hasSeenOnboarding:', hasSeenOnboarding)
 
   return (
     <NavigationContainer>

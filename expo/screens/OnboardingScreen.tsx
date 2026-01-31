@@ -11,11 +11,60 @@ import {
   ScrollView,
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import Svg, { Circle, Path, Line, G } from 'react-native-svg'
 
 const { width, height } = Dimensions.get('window')
 
 interface OnboardingScreenProps {
   onComplete: () => void
+}
+
+// Creative headset logo component
+function ChosenLogo() {
+  return (
+    <Svg width={90} height={90} viewBox="0 0 100 100">
+      <G>
+        {/* Left ear cup outer */}
+        <Circle cx="22" cy="42" r="16" fill="none" stroke="#00FF00" strokeWidth="2.5" />
+        {/* Left ear cup inner accent */}
+        <Circle cx="22" cy="42" r="11" fill="none" stroke="#00FF00" strokeWidth="1" opacity="0.5" />
+        
+        {/* Right ear cup outer */}
+        <Circle cx="78" cy="42" r="16" fill="none" stroke="#00FF00" strokeWidth="2.5" />
+        {/* Right ear cup inner accent */}
+        <Circle cx="78" cy="42" r="11" fill="none" stroke="#00FF00" strokeWidth="1" opacity="0.5" />
+        
+        {/* Headband arc left */}
+        <Path d="M 22 26 Q 15 12 50 10" fill="none" stroke="#00FF00" strokeWidth="2.5" strokeLinecap="round" />
+        {/* Headband arc right */}
+        <Path d="M 50 10 Q 85 12 78 26" fill="none" stroke="#00FF00" strokeWidth="2.5" strokeLinecap="round" />
+        
+        {/* Center connector with gold accent */}
+        <Line x1="50" y1="10" x2="50" y2="24" stroke="#FFD700" strokeWidth="2" strokeLinecap="round" />
+        
+        {/* Left connection bracket */}
+        <Line x1="22" y1="26" x2="22" y2="32" stroke="#00FF00" strokeWidth="2" strokeLinecap="round" opacity="0.8" />
+        {/* Right connection bracket */}
+        <Line x1="78" y1="26" x2="78" y2="32" stroke="#00FF00" strokeWidth="2" strokeLinecap="round" opacity="0.8" />
+        
+        {/* Microphone boom - curved */}
+        <Path d="M 32 56 Q 38 70 42 82" fill="none" stroke="#00FF00" strokeWidth="2" strokeLinecap="round" />
+        {/* Mic capsule - gold circle */}
+        <Circle cx="42" cy="85" r="2.5" fill="#FFD700" />
+        {/* Mic mesh detail */}
+        <Circle cx="42" cy="85" r="4" fill="none" stroke="#FFD700" strokeWidth="0.8" opacity="0.6" />
+        
+        {/* Speaker driver detail - left */}
+        <Circle cx="22" cy="42" r="7" fill="none" stroke="#00FF00" strokeWidth="0.8" opacity="0.4" />
+        {/* Speaker driver detail - right */}
+        <Circle cx="78" cy="42" r="7" fill="none" stroke="#00FF00" strokeWidth="0.8" opacity="0.4" />
+        
+        {/* Sound waves accent */}
+        <Path d="M 50 50 Q 60 45 65 42" fill="none" stroke="#FFD700" strokeWidth="1" opacity="0.6" strokeLinecap="round" />
+        <Path d="M 50 56 Q 58 52 62 50" fill="none" stroke="#FFD700" strokeWidth="1" opacity="0.4" strokeLinecap="round" />
+      </G>
+    </Svg>
+  )
 }
 
 export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
@@ -26,7 +75,7 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
   React.useEffect(() => {
     fadeAnim.setValue(0)
     slideAnim.setValue(50)
-    
+
     Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,
@@ -43,7 +92,7 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
 
   const steps = [
     {
-      title: 'Welcome to chosen',
+      title: 'Welcome to Chosen',
       description: 'Stream music. Earn rewards. Own your experience.',
       icon: 'music-box-multiple-outline',
       highlight: 'Music redefined',
@@ -82,9 +131,21 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
   return (
     <View style={styles.container}>
       <ScrollView scrollEnabled={false} style={styles.content}>
-        {/* Header */}
+        {/* Logo and Header */}
         <View style={styles.header}>
-          <Text style={styles.logo}>chosen</Text>
+          {currentStep === 0 && (
+            <Animated.View
+              style={[
+                styles.logoContainer,
+                {
+                  opacity: fadeAnim,
+                },
+              ]}
+            >
+              <ChosenLogo />
+            </Animated.View>
+          )}
+          <Text style={styles.logo}>Chosen</Text>
         </View>
 
         {/* Progress Bar */}
@@ -182,6 +243,10 @@ const styles = StyleSheet.create({
   },
   header: {
     marginBottom: 40,
+    alignItems: 'center',
+  },
+  logoContainer: {
+    marginBottom: 16,
   },
   logo: {
     fontSize: 32,

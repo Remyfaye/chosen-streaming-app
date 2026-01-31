@@ -74,6 +74,7 @@
     "react-native": "0.83.1",
     "react-native-safe-area-context": "latest",
     "react-native-screens": "latest",
+    "react-native-svg": "15.15.1",
     "react-native-webview": "latest",
     "react-resizable-panels": "^2.1.7",
     "recharts": "2.15.4",
