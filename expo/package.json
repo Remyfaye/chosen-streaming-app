@@ -22,8 +22,7 @@
     "@react-navigation/native-stack": "^6.10.0",
     "@react-navigation/bottom-tabs": "^6.5.0",
     "@expo/vector-icons": "^15.0.3",
-    "axios": "^1.6.0",
-    "react-native-web": "~0.19.10"
+    "axios": "^1.6.0"
   },
   "devDependencies": {
     "@types/react": "~19.1.10",
