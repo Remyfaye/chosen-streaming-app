@@ -60,12 +60,12 @@ function StreamingIllustration() {
   return (
     <View style={styles.illustration}>
       <Image
-        source={require('../assets/hero.jpeg')}
+        source={require("../assets/hero.png")}
         style={styles.illustrationImage}
         resizeMode="contain"
       />
     </View>
-  )
+  );
 }
 
 function PremiumIllustration() {
@@ -79,12 +79,12 @@ function PremiumIllustration() {
           style={{ opacity: 0.8 }}
         />
         <View style={styles.starBurst}>
-        <MaterialCommunityIcons
-          name="star"
-          size={35}
-          color="#39FF14"
-          style={{ opacity: 0.6 }}
-        />
+          <MaterialCommunityIcons
+            name="star"
+            size={35}
+            color="#39FF14"
+            style={{ opacity: 0.6 }}
+          />
           <MaterialCommunityIcons
             name="star"
             size={35}
