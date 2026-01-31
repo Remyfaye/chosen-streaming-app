@@ -14,6 +14,7 @@ import {
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import axios from 'axios'
+import { ChosenLogoHorizontal } from './OnboardingScreen'
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3000/api'
 
@@ -199,7 +200,7 @@ export default function LoginScreen({ onLoginSuccess }: { onLoginSuccess: (token
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         {/* Logo */}
         <View style={styles.logoSection}>
-          <Text style={styles.logo}>Chosen</Text>
+          <ChosenLogoHorizontal size="large" />
           <Text style={styles.tagline}>{isSignup ? 'Join the movement' : 'Welcome back'}</Text>
         </View>
 
@@ -387,13 +388,7 @@ const styles = StyleSheet.create({
   logoSection: {
     alignItems: 'center',
     marginBottom: 48,
-  },
-  logo: {
-    fontSize: 40,
-    fontWeight: '800',
-    color: '#fff',
-    letterSpacing: 1,
-    marginBottom: 8,
+    gap: 12,
   },
   tagline: {
     fontSize: 14,
