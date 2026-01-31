@@ -4,7 +4,7 @@
     "slug": "crypto-beats",
     "version": "1.0.0",
     "orientation": "portrait",
-    "main": "app.tsx",
+    "main": "App.tsx",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
     "splash": {
@@ -13,15 +13,13 @@
       "backgroundColor": "#000000"
     },
     "ios": {
-      "supportsTabletMode": true,
-      "newArchEnabled": false
+      "supportsTabletMode": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#000000"
-      },
-      "newArchEnabled": false
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
