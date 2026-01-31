@@ -1,0 +1,13 @@
+# Prisma Configuration
+# This file contains the Prisma database schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+# For more details, see the schema.prisma file in /prisma/schema.prisma
