@@ -18,26 +18,65 @@ interface OnboardingScreenProps {
   onComplete: () => void
 }
 
-// Creative headset logo component using React Native
-function ChosenLogo() {
+// Horizontal Chosen Logo Component
+export function ChosenLogoHorizontal({ size = 'medium' }: { size?: 'small' | 'medium' | 'large' }) {
+  const sizeConfig = {
+    small: { headsetSize: 28, textSize: 18, gap: 8 },
+    medium: { headsetSize: 40, textSize: 24, gap: 12 },
+    large: { headsetSize: 56, textSize: 32, gap: 16 },
+  }
+  const config = sizeConfig[size]
+
   return (
-    <View style={styles.logoWrapper}>
-      {/* Headset visualization using stacked circular elements */}
-      <View style={styles.headsetContainer}>
-        {/* Left ear cup */}
-        <View style={[styles.earCup, styles.earCupLeft]} />
-        {/* Headband */}
-        <View style={styles.headband} />
-        {/* Right ear cup */}
-        <View style={[styles.earCup, styles.earCupRight]} />
+    <View style={styles.logoHorizontal}>
+      {/* Headset Icon */}
+      <View style={[styles.headsetIcon, { width: config.headsetSize, height: config.headsetSize }]}>
+        <MaterialCommunityIcons name="headphones" size={config.headsetSize * 0.75} color="#00FF00" />
       </View>
-      {/* Microphone boom indicator */}
-      <View style={styles.micIndicator}>
-        <MaterialCommunityIcons name="microphone" size={16} color="#FFD700" />
+      {/* "Chosen" Text */}
+      <Text style={[styles.logoText, { fontSize: config.textSize }]}>Chosen</Text>
+    </View>
+  )
+}
+
+// Playful illustration components for each onboarding step
+function StreamingIllustration() {
+  return (
+    <View style={styles.illustration}>
+      <View style={styles.musicNotes}>
+        <MaterialCommunityIcons name="music" size={60} color="#00FF00" style={{ opacity: 0.7 }} />
       </View>
-      {/* Sound wave accent */}
-      <View style={styles.soundWave}>
-        <MaterialCommunityIcons name="volume-high" size={20} color="#00FF00" />
+      <View style={styles.pulseCircle}>
+        <View style={[styles.pulseRing, { borderColor: '#00FF00', opacity: 0.8 }]} />
+        <View style={[styles.pulseRing, { borderColor: '#FFD700', opacity: 0.5 }]} />
+      </View>
+    </View>
+  )
+}
+
+function EarningIllustration() {
+  return (
+    <View style={styles.illustration}>
+      <View style={styles.coinStack}>
+        <View style={[styles.coin, { bottom: 20 }]}>
+          <MaterialCommunityIcons name="bitcoin" size={50} color="#FFD700" />
+        </View>
+        <View style={[styles.coin, { bottom: 0 }]}>
+          <MaterialCommunityIcons name="lightning-bolt" size={40} color="#00FF00" />
+        </View>
+      </View>
+    </View>
+  )
+}
+
+function ArtistIllustration() {
+  return (
+    <View style={styles.illustration}>
+      <View style={styles.heartContainer}>
+        <MaterialCommunityIcons name="heart-multiple" size={80} color="#FF69B4" style={{ opacity: 0.8 }} />
+        <View style={styles.artistIcon}>
+          <MaterialCommunityIcons name="music-box" size={40} color="#00FF00" />
+        </View>
       </View>
     </View>
   )
@@ -69,26 +108,30 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
   const steps = [
     {
       title: 'Welcome to Chosen',
-      description: 'Stream music. Earn rewards. Own your experience.',
-      icon: 'music-box-multiple-outline',
+      description: 'Stream music, earn rewards, and own your listening experience.',
       highlight: 'Music redefined',
+      component: StreamingIllustration,
+      bgColor: '#0A1428',
     },
     {
       title: 'Earn While You Listen',
       description: 'Every song is an opportunity. Get rewarded instantly for what you love.',
-      icon: 'lightning-bolt',
       highlight: 'Passive income',
+      component: EarningIllustration,
+      bgColor: '#1A1A2E',
     },
     {
       title: 'Support Artists Directly',
       description: 'Your streams go straight to creators. No middlemen, just pure connection.',
-      icon: 'heart-multiple-outline',
       highlight: 'Direct support',
+      component: ArtistIllustration,
+      bgColor: '#16213E',
     },
   ]
 
   const step = steps[currentStep]
   const progress = ((currentStep + 1) / steps.length) * 100
+  const IllustrationComponent = step.component
 
   const handleNext = () => {
     if (currentStep < steps.length - 1) {
@@ -105,24 +148,11 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: step.bgColor }]}>
       <ScrollView scrollEnabled={false} style={styles.content}>
-        {/* Logo and Header */}
+        {/* Header with Logo */}
         <View style={styles.header}>
-          {currentStep === 0 && (
-            <Animated.View
-              style={[
-                styles.logoContainer,
-                {
-                  opacity: fadeAnim,
-                  transform: [{ translateY: slideAnim }],
-                },
-              ]}
-            >
-              <ChosenLogo />
-            </Animated.View>
-          )}
-          <Text style={styles.logo}>Chosen</Text>
+          <ChosenLogoHorizontal size="medium" />
         </View>
 
         {/* Progress Bar */}
@@ -130,23 +160,17 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
           <View style={[styles.progressBar, { width: `${progress}%` }]} />
         </View>
 
-        {/* Icon Section */}
+        {/* Illustration Section */}
         <Animated.View
           style={[
-            styles.iconSection,
+            styles.illustrationSection,
             {
               opacity: fadeAnim,
               transform: [{ translateY: slideAnim }],
             },
           ]}
         >
-          <View style={styles.iconWrapper}>
-            <MaterialCommunityIcons
-              name={step.icon as any}
-              size={88}
-              color="#00FF00"
-            />
-          </View>
+          <IllustrationComponent />
         </Animated.View>
 
         {/* Text Content */}
@@ -211,101 +235,110 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
   },
   content: {
     flex: 1,
     paddingHorizontal: 24,
-    paddingTop: 60,
+    paddingTop: 40,
   },
   header: {
     marginBottom: 40,
     alignItems: 'center',
   },
-  logoContainer: {
-    marginBottom: 16,
-  },
-  logoWrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 90,
-    width: 90,
-  },
-  headsetContainer: {
+  logoHorizontal: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
     gap: 12,
+    justifyContent: 'center',
   },
-  earCup: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    borderWidth: 2,
-    borderColor: '#00FF00',
-    backgroundColor: 'rgba(0, 255, 0, 0.08)',
+  headsetIcon: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  earCupLeft: {
-    marginRight: -8,
-  },
-  earCupRight: {
-    marginLeft: -8,
-  },
-  headband: {
-    width: 16,
-    height: 40,
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
-    borderLeftWidth: 2,
-    borderTopWidth: 2,
-    borderRightWidth: 2,
-    borderColor: '#00FF00',
-    marginBottom: 12,
-  },
-  micIndicator: {
-    marginTop: 8,
-    padding: 8,
-    backgroundColor: 'rgba(255, 215, 0, 0.1)',
-    borderRadius: 20,
-  },
-  soundWave: {
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-    opacity: 0.7,
-  },
-  logo: {
-    fontSize: 32,
+  logoText: {
     fontWeight: '700',
     color: '#fff',
-    letterSpacing: 2,
+    letterSpacing: 1,
   },
   progressContainer: {
     height: 3,
-    backgroundColor: '#222',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 1.5,
     overflow: 'hidden',
-    marginBottom: 60,
+    marginBottom: 50,
   },
   progressBar: {
     height: '100%',
     backgroundColor: '#00FF00',
     borderRadius: 1.5,
   },
-  iconSection: {
+  illustrationSection: {
     alignItems: 'center',
     marginBottom: 60,
-    minHeight: 140,
+    minHeight: 200,
+    justifyContent: 'center',
   },
-  iconWrapper: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: 'rgba(0, 255, 0, 0.08)',
+  illustration: {
+    width: 200,
+    height: 200,
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'rgba(0, 255, 0, 0.2)',
+  },
+  musicNotes: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  pulseCircle: {
+    position: 'absolute',
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  pulseRing: {
+    position: 'absolute',
+    borderWidth: 2,
+    borderRadius: 75,
+    width: '100%',
+    height: '100%',
+  },
+  coinStack: {
+    position: 'relative',
+    width: 120,
+    height: 120,
+    alignItems: 'center',
+  },
+  coin: {
+    position: 'absolute',
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: 'rgba(0, 255, 0, 0.1)',
+    borderWidth: 2,
+    borderColor: '#00FF00',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  heartContainer: {
+    position: 'relative',
+    width: 150,
+    height: 150,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  artistIcon: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: 'rgba(0, 255, 0, 0.2)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#00FF00',
   },
   textSection: {
     marginBottom: 80,
@@ -341,7 +374,7 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#333',
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
     opacity: 0.5,
   },
   stepIndicatorActive: {
@@ -379,7 +412,7 @@ const styles = StyleSheet.create({
   secondaryButton: {
     flex: 1,
     borderWidth: 1.5,
-    borderColor: '#333',
+    borderColor: 'rgba(255, 255, 255, 0.2)',
     borderRadius: 12,
     paddingVertical: 16,
     justifyContent: 'center',
