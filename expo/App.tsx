@@ -56,7 +56,7 @@ export default function App() {
   const handleOnboardingComplete = async () => {
     console.log("[v0] Onboarding completed");
     await AsyncStorage.setItem("hasSeenOnboarding", "true");
-    setHasSeenOnboarding(true);
+    setHasSeenOnboarding(false);
   };
 
   const handleLoginSuccess = async (newToken: string, newUser: any) => {
