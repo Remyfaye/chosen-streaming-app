@@ -94,7 +94,11 @@ export default function LoginScreen({
     }
 
     if (error.code === "ENOTFOUND" || error.code === "ECONNREFUSED") {
-      return "Unable to connect to server. Please check your internet connection.";
+      return "Backend server is not running. Please ensure the Next.js API is running at " + API_URL;
+    }
+
+    if (error.message && error.message.includes("Network Error")) {
+      return "Network error: Unable to reach the server. Please check if the backend is running.";
     }
 
     return (

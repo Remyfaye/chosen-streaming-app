@@ -9,6 +9,7 @@ import {
   Dimensions,
   Animated,
   ScrollView,
+  Image,
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
@@ -39,17 +40,15 @@ export function ChosenLogoHorizontal({ size = 'medium' }: { size?: 'small' | 'me
   )
 }
 
-// Playful illustration components for each onboarding step
+// First slide - Creative music streaming illustration with provided image
 function StreamingIllustration() {
   return (
     <View style={styles.illustration}>
-      <View style={styles.musicNotes}>
-        <MaterialCommunityIcons name="music" size={60} color="#00FF00" style={{ opacity: 0.7 }} />
-      </View>
-      <View style={styles.pulseCircle}>
-        <View style={[styles.pulseRing, { borderColor: '#00FF00', opacity: 0.8 }]} />
-        <View style={[styles.pulseRing, { borderColor: '#FFD700', opacity: 0.5 }]} />
-      </View>
+      <Image
+        source={{ uri: '/images/whatsapp-20image-202026-01-31-20at-206.jpeg' }}
+        style={styles.illustrationImage}
+        resizeMode="contain"
+      />
     </View>
   )
 }
@@ -279,6 +278,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: 120,
+  },
+  illustrationImage: {
+    width: 280,
+    height: 380,
+    borderRadius: 16,
   },
   musicNotes: {
     alignItems: 'center',
