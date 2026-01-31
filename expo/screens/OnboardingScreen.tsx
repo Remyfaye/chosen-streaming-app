@@ -44,7 +44,7 @@ export function ChosenLogoHorizontal({
         <MaterialCommunityIcons
           name="headphones"
           size={config.headsetSize * 0.8}
-          color="#00FF00"
+          color="#39FF14"
         />
       </View>
       {/* "Chosen" Text */}
@@ -60,12 +60,12 @@ function StreamingIllustration() {
   return (
     <View style={styles.illustration}>
       <Image
-        source={{ uri: "/hero.jpeg" }}
+        source={require('../assets/hero.jpeg')}
         style={styles.illustrationImage}
         resizeMode="contain"
       />
     </View>
-  );
+  )
 }
 
 function PremiumIllustration() {
@@ -79,12 +79,12 @@ function PremiumIllustration() {
           style={{ opacity: 0.8 }}
         />
         <View style={styles.starBurst}>
-          <MaterialCommunityIcons
-            name="star"
-            size={35}
-            color="#00FF00"
-            style={{ opacity: 0.6 }}
-          />
+        <MaterialCommunityIcons
+          name="star"
+          size={35}
+          color="#39FF14"
+          style={{ opacity: 0.6 }}
+        />
           <MaterialCommunityIcons
             name="star"
             size={35}
@@ -108,7 +108,7 @@ function ArtistIllustration() {
           style={{ opacity: 0.8 }}
         />
         <View style={styles.artistIcon}>
-          <MaterialCommunityIcons name="music-box" size={40} color="#00FF00" />
+          <MaterialCommunityIcons name="music-box" size={40} color="#39FF14" />
         </View>
       </View>
     </View>
