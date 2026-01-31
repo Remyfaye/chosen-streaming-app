@@ -18,12 +18,12 @@ import { ChosenLogoHorizontal } from './OnboardingScreen'
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3000/api'
 
-export default function LoginScreen({ onLoginSuccess }: { onLoginSuccess: (token: string, user: any) => void }) {
+export default function LoginScreen({ onLoginSuccess, isSignupMode = false }: { onLoginSuccess: (token: string, user: any) => void; isSignupMode?: boolean }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
   const [loading, setLoading] = useState(false)
-  const [isSignup, setIsSignup] = useState(false)
+  const [isSignup, setIsSignup] = useState(isSignupMode)
   const [userType, setUserType] = useState<'LISTENER' | 'ARTIST'>('LISTENER')
   const [error, setError] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -377,7 +377,7 @@ export default function LoginScreen({ onLoginSuccess }: { onLoginSuccess: (token
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#16213E',
   },
   scrollContent: {
     flexGrow: 1,

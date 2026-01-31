@@ -18,7 +18,7 @@ interface OnboardingScreenProps {
   onComplete: () => void
 }
 
-// Horizontal Chosen Logo Component
+// Horizontal Chosen Logo Component with simple headset
 export function ChosenLogoHorizontal({ size = 'medium' }: { size?: 'small' | 'medium' | 'large' }) {
   const sizeConfig = {
     small: { headsetSize: 28, textSize: 18, gap: 8 },
@@ -29,9 +29,9 @@ export function ChosenLogoHorizontal({ size = 'medium' }: { size?: 'small' | 'me
 
   return (
     <View style={styles.logoHorizontal}>
-      {/* Headset Icon */}
+      {/* Headset Icon - Simple Design */}
       <View style={[styles.headsetIcon, { width: config.headsetSize, height: config.headsetSize }]}>
-        <MaterialCommunityIcons name="headphones" size={config.headsetSize * 0.75} color="#00FF00" />
+        <MaterialCommunityIcons name="headphones" size={config.headsetSize * 0.8} color="#00FF00" />
       </View>
       {/* "Chosen" Text */}
       <Text style={[styles.logoText, { fontSize: config.textSize }]}>Chosen</Text>
@@ -54,15 +54,14 @@ function StreamingIllustration() {
   )
 }
 
-function EarningIllustration() {
+function PremiumIllustration() {
   return (
     <View style={styles.illustration}>
-      <View style={styles.coinStack}>
-        <View style={[styles.coin, { bottom: 20 }]}>
-          <MaterialCommunityIcons name="bitcoin" size={50} color="#FFD700" />
-        </View>
-        <View style={[styles.coin, { bottom: 0 }]}>
-          <MaterialCommunityIcons name="lightning-bolt" size={40} color="#00FF00" />
+      <View style={styles.premiumContainer}>
+        <MaterialCommunityIcons name="crown" size={70} color="#FFD700" style={{ opacity: 0.8 }} />
+        <View style={styles.starBurst}>
+          <MaterialCommunityIcons name="star" size={35} color="#00FF00" style={{ opacity: 0.6 }} />
+          <MaterialCommunityIcons name="star" size={35} color="#FFD700" style={{ opacity: 0.6, marginTop: 20 }} />
         </View>
       </View>
     </View>
@@ -108,17 +107,17 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
   const steps = [
     {
       title: 'Welcome to Chosen',
-      description: 'Stream music, earn rewards, and own your listening experience.',
+      description: 'Stream unlimited music and discover your next favorite artist.',
       highlight: 'Music redefined',
       component: StreamingIllustration,
-      bgColor: '#0A1428',
+      bgColor: '#16213E',
     },
     {
-      title: 'Earn While You Listen',
-      description: 'Every song is an opportunity. Get rewarded instantly for what you love.',
-      highlight: 'Passive income',
-      component: EarningIllustration,
-      bgColor: '#1A1A2E',
+      title: 'Unlock Premium',
+      description: 'Go premium for ad-free listening, offline downloads, and exclusive content.',
+      highlight: 'Premium features',
+      component: PremiumIllustration,
+      bgColor: '#16213E',
     },
     {
       title: 'Support Artists Directly',
@@ -239,7 +238,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 24,
-    paddingTop: 40,
+    paddingTop: 60,
   },
   header: {
     marginBottom: 40,
@@ -249,7 +248,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
-    justifyContent: 'center',
   },
   headsetIcon: {
     justifyContent: 'center',
@@ -262,10 +260,10 @@ const styles = StyleSheet.create({
   },
   progressContainer: {
     height: 3,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#333',
     borderRadius: 1.5,
     overflow: 'hidden',
-    marginBottom: 50,
+    marginBottom: 60,
   },
   progressBar: {
     height: '100%',
@@ -275,70 +273,53 @@ const styles = StyleSheet.create({
   illustrationSection: {
     alignItems: 'center',
     marginBottom: 60,
-    minHeight: 200,
-    justifyContent: 'center',
+    minHeight: 140,
   },
   illustration: {
-    width: 200,
-    height: 200,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 120,
   },
   musicNotes: {
     alignItems: 'center',
-    justifyContent: 'center',
+    marginBottom: 20,
   },
   pulseCircle: {
-    position: 'absolute',
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+    width: 100,
+    height: 100,
   },
   pulseRing: {
     position: 'absolute',
     borderWidth: 2,
-    borderRadius: 75,
-    width: '100%',
-    height: '100%',
+    borderRadius: 50,
   },
-  coinStack: {
-    position: 'relative',
-    width: 120,
-    height: 120,
+  premiumContainer: {
     alignItems: 'center',
-  },
-  coin: {
-    position: 'absolute',
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: 'rgba(0, 255, 0, 0.1)',
-    borderWidth: 2,
-    borderColor: '#00FF00',
     justifyContent: 'center',
-    alignItems: 'center',
+  },
+  starBurst: {
+    marginTop: 20,
+    flexDirection: 'row',
+    gap: 30,
   },
   heartContainer: {
-    position: 'relative',
-    width: 150,
-    height: 150,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   artistIcon: {
     position: 'absolute',
-    bottom: 10,
-    right: 10,
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: 'rgba(0, 255, 0, 0.2)',
-    justifyContent: 'center',
+    backgroundColor: '#16213E',
+    borderRadius: 50,
+    padding: 10,
+  },
+  coinStack: {
     alignItems: 'center',
-    borderWidth: 2,
-    borderColor: '#00FF00',
+    gap: 15,
+  },
+  coin: {
+    alignItems: 'center',
   },
   textSection: {
     marginBottom: 80,
@@ -374,7 +355,7 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    backgroundColor: '#333',
     opacity: 0.5,
   },
   stepIndicatorActive: {
@@ -412,7 +393,7 @@ const styles = StyleSheet.create({
   secondaryButton: {
     flex: 1,
     borderWidth: 1.5,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
+    borderColor: '#444',
     borderRadius: 12,
     paddingVertical: 16,
     justifyContent: 'center',
